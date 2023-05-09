@@ -3,7 +3,7 @@ const cookieParser = require("cookie-parser");
 const bodyParser = require("body-parser");
 const morgan = require("morgan");
 const routes = require("./routes/index.js");
-const port = process.env.PORT || 3001;
+const port = process.env.PORT || 3000;
 
 require("./db.js");
 
@@ -17,7 +17,7 @@ server.use(cookieParser()); //REQ= GET manda en req, la Cookie header...req.cook
 server.use(morgan("dev")); //consologuea los req
 server.use((req, res, next) => {
   //middleware para dejar pasar las solicitudes de cualquiera
-  res.header("Access-Control-Allow-Origin", `${port}`); // update to match the domain you will make the request from
+  res.header("Access-Control-Allow-Origin", `http://localhost:${port}`); // update to match the domain you will make the request from
   res.header("Access-Control-Allow-Credentials", "true");
   res.header(
     "Access-Control-Allow-Headers",

@@ -1,7 +1,9 @@
-const {Country} = require('../../db');
+const {Country, Activity} = require('../../db');
 
 const getCountries = async function (){
-    const countries = await Country.findAll();
+    const countries = await Country.findAll({
+        include: Activity,
+    });
     return countries;
 }
 

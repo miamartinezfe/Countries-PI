@@ -1,4 +1,5 @@
 const { Country, Activity } = require("../../db");
+const { Op } = require("sequelize");
 
 const postActivity = async function ({
   name,
@@ -7,6 +8,7 @@ const postActivity = async function ({
   season,
   countries,
 }) {
+  console.log(name, dificult, duration, season, countries);
   if ((countries && countries.length === 0) || !countries)
     throw new Error("Se debe especificar al menos un pais");
   countries = await Country.findAll({

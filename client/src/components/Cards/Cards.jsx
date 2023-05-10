@@ -3,6 +3,7 @@ import Card from "../Card/Card";
 import { useState } from "react";
 import { connect } from "react-redux";
 import { getCountries } from "../../redux/actions/actions";
+import './cards.css'
 
 export function Cards({ filteredCountries, getCountries }) {
   useEffect(() => {
@@ -16,7 +17,7 @@ export function Cards({ filteredCountries, getCountries }) {
   const currentItems = items ? items.slice(firstIndex, lastIndex) : null;
 
   return (
-    <div>
+    <div className="cards">
       <div>
         <button
           disabled={currentPage === 1}

@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
-
+import style from "./detail.module.css"
 export default function Detail() {
   const [country, setCountry] = useState({});
   const { id } = useParams();
@@ -16,13 +16,18 @@ export default function Detail() {
       });
     return setCountry({});
   }, [id]);
+  if (Array.isArray(country.activities)) {
+    country.activities = country.activities.map((activity) => {
+      return activity.name;
+    });
+  }
   if (!country) return <h1>No existe el pais con ID : {id}</h1>;
   return (
-    <div>
+    <div className="detailContainer">
       <Link to={`/home`}>
         <button>HOME</button>
       </Link>
-      <div>
+      <div className={style.divData}>
         <h2>{country.name}</h2>
         {country.flagImg?.length > 0 && (
           <img src={country.flagImg[0]} alt="" width="400" height="250"></img>
@@ -36,7 +41,7 @@ export default function Detail() {
         <p>Continent: {country.continent}</p>
         <p>Population: {country.population}</p>
         {country.activities?.length > 0 && (
-          <p>Activities: {country.activities}</p>
+          <p>Activities: {country.activities.join("-")}</p>
         )}
       </div>
     </div>

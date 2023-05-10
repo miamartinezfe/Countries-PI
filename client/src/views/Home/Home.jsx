@@ -3,16 +3,25 @@ import SearchBar from "../../components/SearchBar/SearchBar";
 import Cards from "../../components/Cards/Cards";
 import { connect } from "react-redux";
 import { getCountries } from "../../redux/actions/actions";
+import Form from "../Form/Form";
+import { Link } from "react-router-dom";
 
 export function Home({ getCountries, countries }) {
-  useEffect( () => {
-    console.log('Obteniendo paises');
+  useEffect(() => {
+    console.log("Obteniendo paises");
     getCountries();
   }, [getCountries]);
   return (
     <div>
       <div>
-        <SearchBar />
+        <div>
+          <SearchBar />
+        </div>
+        <div>
+          <Link to={"/form"}>
+            <button>Form</button>
+          </Link>
+        </div>
       </div>
       <div>
         <Cards paises={countries}></Cards>

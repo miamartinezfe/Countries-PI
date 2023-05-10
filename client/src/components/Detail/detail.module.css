@@ -1,0 +1,14 @@
+h2{
+    color:brown;
+}
+p{
+    color:black
+}
+.divData{
+    font-style: oblique;
+    background-color:beige;
+    width: 400px;
+    border: 5px solid red;
+    align-items: center;
+    align-self:baseline;
+}

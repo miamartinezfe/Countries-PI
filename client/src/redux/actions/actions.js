@@ -1,8 +1,46 @@
-import { GET_COUNTRY, GET_COUNTRIES, SET_COUNTRIES } from "./types";
+import {
+  GET_COUNTRY,
+  GET_COUNTRIES,
+  SET_COUNTRIES,
+  FILTER_CONTINENT,
+  FILTER_ACTIVITY,
+  GET_ACTIVITIES,
+  FILTER_BY_NAME
+} from "./types";
 import axios from "axios";
 
+const filterByName = (sort) => {
+  return{
+    type: FILTER_BY_NAME,
+    payload : sort,
+  }
+}
+
+const filterActivity = (activity) => {
+  return {
+    type: FILTER_ACTIVITY,
+    payload: activity,
+  };
+};
+const getActivities = () => {
+  return (dispatch) => {
+    axios.get(`/activities`).then(({ data }) => {
+      return dispatch({
+        type: GET_ACTIVITIES,
+        payload: data,
+      });
+    });
+  };
+};
+
+const filterContinent = (continent) => {
+  return {
+    type: FILTER_CONTINENT,
+    payload: continent,
+  };
+};
+
 const getCountry = (name) => {
-  
   return (dispatch) => {
     axios
       .get(`/countries?name=${name}`)
@@ -13,7 +51,7 @@ const getCountry = (name) => {
         });
       })
       .catch(() => {
-        alert('Country not found');
+        alert("Country not found");
       });
   };
 };
@@ -36,4 +74,12 @@ const setCountries = (countries) => {
   };
 };
 
-export { getCountry, getCountries, setCountries };
+export {
+  getCountry,
+  getCountries,
+  setCountries,
+  filterContinent,
+  getActivities,
+  filterActivity,
+  filterByName,
+};

@@ -1,9 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import './card.css'
 
 export default function Card({id,flagImg,name,continent}) {
   return (
-    <div>
+    <div className="card">
       <Link to={`/detail/${id}`}>
         <h1>{name}</h1>
       </Link>

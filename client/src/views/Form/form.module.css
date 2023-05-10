@@ -1,0 +1,18 @@
+label{
+    offset-distance: 200;
+    color: aliceblue;
+    font-weight: 500;
+}
+span{
+    color:crimson;
+    font-weight: 500;
+}
+span{
+    display: flex;
+  flex-direction: column;
+  align-content:baseline;
+}
+div{
+    color:aqua;
+    font-weight: 500;
+}

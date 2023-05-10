@@ -1,4 +1,4 @@
-const { Country } = require('../../db');
+const { Country, Activity } = require("../../db");
 const { Op } = require("sequelize");
 
 const getCountryByQuery = async function (query) {
@@ -13,13 +13,15 @@ const getCountryByQuery = async function (query) {
     propiedad === "continent" ||
     propiedad === "subregion"
   ) {
-    var countries = await Country.findAll({
-      where: {
-        [propiedad]: {
-          [Op.iLike]: key,
+    var countries = await Country.findAll(
+      {
+        where: {
+          [propiedad]: {
+            [Op.iLike]: key,
+          },
         },
-      },
-    });
+      }
+    );
   } else {
     var countries = await Country.findAll({
       where: {

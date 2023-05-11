@@ -1,3 +1,39 @@
-span{
-    color: azure;
+.container{
+    display: flex;
+    flex-direction: row;
+}
+.filter{
+    width: 70%;
+    border-radius: 50px;
+    display: flex;
+    justify-content: flex-start;
+}
+.search{
+    width: 30%;
+    border-radius: 50px;
+    display: flex;
+    justify-content: flex-end;
+}
+.busqueda{
+    width: 100%;
+    border-top-left-radius: 15px;
+    border-bottom-left-radius: 15px;
+    border-block-color: 5px;
+    
+}
+.filtro{
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: rgb(43, 42, 42);
+    color: antiquewhite;
+    border-radius: 5px;
+    width: 5cm;
+    margin: 5px;
+}
+.boton{
+    background-color: rgb(43, 42, 42);
+    color: antiquewhite;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: 600;
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
 }

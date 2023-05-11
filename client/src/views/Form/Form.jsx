@@ -1,6 +1,6 @@
-import React, { useEffect, useState  } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import "./form.module.css";
+import form from "./form.module.css";
 import { connect } from "react-redux";
 import validation from "./validation.js";
 import { getCountries } from "../../redux/actions/actions";
@@ -43,6 +43,7 @@ export function Form({ countries, getCountries }) {
         countries
       )
     );
+    console.log(activity);
     if (event.key === "Enter") {
       event.preventDefault();
       activity.countries.find((country) => country === event.target.value)
@@ -63,76 +64,111 @@ export function Form({ countries, getCountries }) {
     alert("Actividad creada satisfactoriamente");
   };
   return (
-    <form onSubmit={handleSubmit}>
-      <div>
-        <Link to={"/home"}>
-          <button>HOME</button>
-        </Link>
+    <form onSubmit={handleSubmit} className={form.form}>
+      <div className={form.formulario}>
+        <div>
+          <input
+            className={form.input}
+            name="name"
+            type="text"
+            value={activity.name}
+            onChange={handleChange}
+          ></input>
+
+          <div />
+
+          <input
+            className={form.input}
+            name="dificult"
+            type="number"
+            value={activity.dificult}
+            onChange={handleChange}
+          ></input>
+
+          <div />
+
+          <input
+            className={form.input}
+            name="duration"
+            type="number"
+            value={activity.duration}
+            onChange={handleChange}
+          ></input>
+
+          <div />
+
+          <input
+            className={form.input}
+            name="season"
+            list="seasons"
+            id="seasons-choice"
+            value={activity.season}
+            onChange={handleChange}
+          ></input>
+
+          <datalist id="seasons">
+            <option value={"Autumn"} />
+            <option value={"Spring"} />
+            <option value={"Summer"} />
+            <option value={"Winter"} />
+          </datalist>
+
+          <div />
+
+          <input
+            className={form.input}
+            name="countries"
+            list="Countries"
+            id="Countries-choice"
+            onChange={handleChangeList}
+            onKeyDown={handleChangeList}
+            placeholder="Press Enter to Add Country"
+          ></input>
+
+          <p className={form.p}>{activity.countries.join(" - ")} </p>
+          <datalist id="Countries">
+            {countries.map((country) => {
+              return <option value={country.name} key={country.id} />;
+            })}
+          </datalist>
+          <button
+            className={form.boton}
+            type="submit"
+            disabled={
+              activity.countries.length === 0 || Object.keys(errors).length > 0
+            }
+          >
+            Submit
+          </button>
+        </div>
       </div>
-      <label>Nombre </label>
-      <input
-        name="name"
-        type="text"
-        value={activity.name}
-        onChange={handleChange}
-      ></input>
-      <span>{errors.name}</span>
-      <div />
-      <label>Dificultad </label>
-      <input
-        name="dificult"
-        type="number"
-        value={activity.dificult}
-        onChange={handleChange}
-      ></input>
-      <span>{errors.dificult}</span>
-      <div />
-      <label>Duracion </label>
-      <input
-        name="duration"
-        type="number"
-        value={activity.duration}
-        onChange={handleChange}
-      ></input>
-      <span>{errors.duration}</span>
-      <div />
-      <label>Temporada </label>
-      <input
-        name="season"
-        list="seasons"
-        id="seasons-choice"
-        value={activity.season}
-        onChange={handleChange}
-      ></input>
-      <span>{errors.season}</span>
-      <datalist id="seasons">
-        <option value={"Autumn"} />
-        <option value={"Spring"} />
-        <option value={"Summer"} />
-        <option value={"Winter"} />
-      </datalist>
+      <div className={form.span}>
+        <p className={form.label}>
+          Name
+          <span className={form.error}> {errors.name}</span>
+        </p>
 
-      <div />
-      <label>Paises </label>
-      <input
-        name="countries"
-        list="Countries"
-        id="Countries-choice"
-        onChange={handleChangeList}
-        onKeyDown={handleChangeList}
-      ></input>
-      <span>{errors.countries}</span>
-      <div>{activity.countries.join(" - ")} </div>
-      <datalist id="Countries">
-        {countries.map((country) => {
-          return <option value={country.name} key={country.id} />;
-        })}
-      </datalist>
+        <p className={form.label}>
+          Dificult (1-5)
+          <span className={form.error}> {errors.dificult}</span>
+        </p>
 
+        <p className={form.label}>
+          Duration (Hours)
+          <span className={form.error}> {errors.duration}</span>
+        </p>
+
+        <p className={form.label}>
+          Season
+          <span className={form.error}> {errors.season}</span>
+        </p>
+
+        <p className={form.label}>
+          Countries
+          <span className={form.error}> {errors.countries}</span>
+        </p>
+      </div>
       <div />
-      {activity.name !== "" && Object.keys(errors).length === 0 ? (
-        <button type="submit">Submit</button>
-      ) : null}
     </form>
   );
 }

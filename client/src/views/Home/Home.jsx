@@ -6,32 +6,29 @@ import { getCountries } from "../../redux/actions/actions";
 import Form from "../Form/Form";
 import { Link } from "react-router-dom";
 
-export function Home({ getCountries, countries }) {
+export function Home({ getCountries, countries, filteredCountries }) {
   useEffect(() => {
     console.log("Obteniendo paises");
     getCountries();
   }, [getCountries]);
   return (
     <div>
+  
       <div>
         <div>
           <SearchBar />
         </div>
-        <div>
-          <Link to={"/form"}>
-            <button>Form</button>
-          </Link>
-        </div>
       </div>
       <div>
-        <Cards paises={countries}></Cards>
+        <Cards></Cards>
       </div>
     </div>
   );
 }
-export function mapStateToProps({ countries }) {
+export function mapStateToProps({ countries, filteredCountries }) {
   return {
     countries,
+    filteredCountries,
   };
 }
 export function mapDispatchToProps(dispatch) {

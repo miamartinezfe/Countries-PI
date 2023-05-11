@@ -1,15 +1,18 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import './card.css'
+import cardStyles from "./card.module.css";
 
-export default function Card({id,flagImg,name,continent}) {
+export default function Card({ id, flagImg, name, continent }) {
   return (
-    <div className="card">
-      <Link to={`/detail/${id}`}>
-        <h1>{name}</h1>
+    <div className={cardStyles.card}>
+      <Link className={cardStyles.Link} to={`/detail/${id}`}>
+        <div className={cardStyles.title}>
+          <p className={cardStyles.text}>{name} ({continent})</p>
+        </div>
       </Link>
-      <h2>{continent}</h2>
-      <img src={flagImg[0]} alt="" width="150" height="150"></img>
+      <div className={cardStyles.imgContainer}>
+        <img className={cardStyles.img} src={flagImg[1]} alt=""></img>
+      </div>
     </div>
   );
 }

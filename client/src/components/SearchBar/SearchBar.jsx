@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 import {
   getCountry,
   setCountries,
@@ -8,7 +9,7 @@ import {
   filterActivity,
   filterByName,
 } from "../../redux/actions/actions";
-import "./searchbar.module.css";
+import search from "./searchbar.module.css";
 
 export function SearchBar({
   getCountry,
@@ -18,7 +19,7 @@ export function SearchBar({
   activities,
   getActivities,
   filterActivity,
-  filterByName
+  filterByName,
 }) {
   const [name, setname] = useState("");
   useEffect(() => {
@@ -60,16 +61,16 @@ export function SearchBar({
     const type = event.target.value;
     switch (type) {
       case "nameAsc":
-        filterByName({key:'name',flow:'asc'});
+        filterByName({ key: "name", flow: "asc" });
         break;
       case "nameDesc":
-        filterByName({key:'name',flow:'desc'});
+        filterByName({ key: "name", flow: "desc" });
         break;
       case "poblationAsc":
-        filterByName({key:'population',flow:'asc'});
+        filterByName({ key: "population", flow: "asc" });
         break;
       case "poblationDesc":
-        filterByName({key:'population',flow:'desc'});
+        filterByName({ key: "population", flow: "desc" });
         break;
       default:
         break;
@@ -77,25 +78,10 @@ export function SearchBar({
   };
 
   return (
-    <div>
-      <div>
-        <input
-          type="search"
-          onChange={handleChange}
-          value={name}
-          onKeyDown={handleEnter}
-        ></input>
-        <button
-          onClick={() => {
-            onSearch(name);
-          }}
-        >
-          Buscar
-        </button>
-      </div>
-
-      <div>
-        <select onChange={handleContinent}>
+    <div className={search.container}>
+      <div className={search.filter}>
+        <select onChange={handleContinent} className={search.filtro}>
+          <option>Filter By Continent</option>
           <option value={"All"}>All</option>
           <option value={"Africa"}>Africa</option>
           <option value={"Antarctica"}>Antarctica</option>
@@ -105,22 +91,42 @@ export function SearchBar({
           <option value={"Oceania"}>Oceania</option>
           <option value={"South America"}>South America</option>
         </select>
-        <span>Filter by Continent</span>
-        <select onChange={handleActivities}>
+
+        <select onChange={handleActivities} className={search.filtro}>
+          <option>Filter By Activities</option>
           <option>All</option>
           {activities &&
             activities.map((activity) => {
               return <option key={activity.id}>{activity.name}</option>;
             })}
         </select>
-        <span>Filter by Activity</span>
-        <select onChange={handleSort}>
-          <option>Please choose one option</option>
+        <select onChange={handleSort} className={search.filtro}>
+          <option>Filter Name or Population</option>
           <option value={"nameAsc"}>Name ASC</option>
           <option value={"nameDesc"}>Name DESC</option>
           <option value={"poblationAsc"}>Poblation ASC</option>
           <option value={"poblationDesc"}>Poblation DESC</option>
         </select>
+        <Link to={'/form'} >
+          <button className={search.filtro}>Add Activity</button>
+        </Link>
+      </div>
+      <div className={search.search}>
+        <input
+          className={search.busqueda}
+          type="search"
+          onChange={handleChange}
+          value={name}
+          onKeyDown={handleEnter}
+        ></input>
+        <button
+          className={search.boton}
+          onClick={() => {
+            onSearch(name);
+          }}
+        >
+          Buscar
+        </button>
       </div>
     </div>
   );

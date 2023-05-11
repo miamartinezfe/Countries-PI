@@ -20,16 +20,14 @@ const rootReducer = (state = initialState, { type, payload }) => {
     case FILTER_BY_NAME:     
       return {
         ...state,
-        filteredCountries: state.filteredCountries.sort((a, b) => {
-          console.log(payload);
-          console.log(a[payload.key]);
+        filteredCountries: [...state.filteredCountries.sort((a, b) => {
           let flow;
           if (payload.flow === "desc") flow = -1;
           else if (payload.flow === "asc") flow = 1;
           if (a[payload.key] > b[payload.key]) return flow;
           if (a[payload.key] < b[payload.key]) return -1 * flow;
           return 0;
-        }),
+        })],
       };
     case GET_ACTIVITIES:
       return {

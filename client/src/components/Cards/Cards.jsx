@@ -25,12 +25,13 @@ export function Cards({ filteredCountries }) {
         >
           Previous
         </button>
+        <span> {currentPage} </span>
         <button
           className={cards.button}
           disabled={lastIndex >= items?.length || !items}
           onClick={() => setCurrentPage(currentPage + 1)}
         >
-          Next
+          Next 
         </button>
       </div>
       <div className={cards.cards}>
